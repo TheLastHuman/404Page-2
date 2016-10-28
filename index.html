@@ -1,0 +1,89 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+
+  <title>KLAUDIJUS</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<style>
+	video { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url(video.mp4) no-repeat;
+    background-size: cover; 
+}
+	</style>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  
+  
+<video no-controls id="video">
+  <source src="close.mp4" type="video/mp4" id="vidSource">
+Your browser does not support the video tag.
+</video>
+<br>
+</body>
+<script>
+
+function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+
+$(document).ready(function(){
+
+	video = document.getElementById("video");
+	source = document.getElementById("vidSource");
+	video.play();
+
+    video.addEventListener('mousedown', function(evt) {
+        var mousePos = getMousePos(video, evt);
+		video.play();
+        //var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+		//var currentScreenSize = "Client Size: " + video.clientHeight + "," + video.clientWidth;		
+      }, false);
+	  
+	video.onended = function(){
+			if(source.getAttribute("src") == "close.mp4"){
+				video.pause();
+				source.setAttribute("src", "open.mp4");
+			}
+			else if (source.getAttribute("src") == "open.mp4"){
+				source.setAttribute("src", "close.mp4");
+				video.pause();
+
+			}
+		}
+
+};
+	
+	  
+	
+	
+	  
+	
+
+</script>
+</html>
